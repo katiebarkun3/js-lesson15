@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson17</title>
+    <style>
+        .element_container{
+            width: 50vw;
+            height: 20vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 1vmin;
+            background-color: rgb(5, 5, 65);
+        }
+
+        .element_container div{
+            width: 10vw;
+            height: 10vw;
+            background-color: darkred;
+            color: white;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .info_container{
+            width: 50vw;
+            margin: 0 auto;
+        }
+
+        p{
+            font-style: 30px;
+        }
+
+        span{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="element_container">
+        <div id="el1">1</div>
+        <div id="el2">2</div>
+        <div id="el3">3</div>
+    </div>
+
+    <div class="info_container">
+        <p>имя события: <span id="name"></span></p>
+        <p>куда пришёл: <span id="targetElement"></span></p>
+        <p>откуда пришёл: <span id="relatedtargetElement"></span></p>
+    </div>
+
+
+
+    <script>
+        let elements = document.querySelectorAll('.element_container');
+
+        for (let item of elements) {
+            item.addEventListener('mouseover', showText);
+            item.addEventListener('mouseout', showText);
+        }
+
+        function showText(){
+            document.getElementById('name').innerText = event.type;
+            document.getElementById('targetElement').innerText = event.target.id;
+            if(event.relatedTarget.classList.contains('element_container')) {
+                document.getElementById('relatedtargetElement').innerText = event.relatedTarget.className; //ссылка на элемент с которого мы пришли
+            } else {
+                document.getElementById('relatedtargetElement').innerText = event.relatedTarget.id;
+            }
+        }
+    </script>
+
+</body>
+</html>
